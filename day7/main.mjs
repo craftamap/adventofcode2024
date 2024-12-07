@@ -36,8 +36,8 @@ function part1() {
     console.log('total sum', sum)
 }
 function part2() {
-    function recursive(puzzleResult, accumulator, remaining) {
-        if (remaining.length == 0) {
+    function recursive(puzzleResult, accumulator, numbers, idx) {
+        if (numbers.length == idx) {
             if (accumulator === puzzleResult) {
                 return true;
             }
@@ -47,15 +47,15 @@ function part2() {
             return false;
         }
 
-        const r1 = recursive(puzzleResult, accumulator + remaining[0], remaining.slice(1))
-        const r2 = recursive(puzzleResult, accumulator * remaining[0], remaining.slice(1))
-        const concatMath = accumulator * Math.pow(10, Math.ceil(Math.log10(remaining[0] + 1))) + remaining[0];
-        const r3 = recursive(puzzleResult, concatMath, remaining.slice(1))
+        const r1 = recursive(puzzleResult, accumulator + numbers[idx], numbers, idx + 1)
+        const r2 = recursive(puzzleResult, accumulator * numbers[idx], numbers, idx + 1)
+        const concatMath = accumulator * Math.pow(10, Math.ceil(Math.log10(numbers[idx] + 1))) + numbers[idx];
+        const r3 = recursive(puzzleResult, concatMath, numbers, idx+1)
         return r1 || r2 || r3;
     }
 
     function evaluate(puzzleLine) {
-        const lineResult = recursive(puzzleLine[0], puzzleLine[1][0], puzzleLine[1].slice(1))
+        const lineResult = recursive(puzzleLine[0], puzzleLine[1][0], puzzleLine[1].slice(1), 0)
         if (lineResult) {
             return puzzleLine[0]
         }
