@@ -43,6 +43,9 @@ function part2() {
             }
             return false;
         }
+        if (accumulator > puzzleResult) {
+            return false;
+        }
 
         const r1 = recursive(puzzleResult, accumulator + remaining[0], remaining.slice(1))
         const r2 = recursive(puzzleResult, accumulator * remaining[0], remaining.slice(1))
