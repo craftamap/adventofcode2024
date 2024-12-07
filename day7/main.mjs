@@ -56,7 +56,6 @@ function part2() {
 
     function evaluate(puzzleLine) {
         const lineResult = recursive(puzzleLine[0], puzzleLine[1][0], puzzleLine[1].slice(1))
-        console.log("solution for", puzzleLine, lineResult)
         if (lineResult) {
             return puzzleLine[0]
         }
