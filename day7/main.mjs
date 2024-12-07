@@ -49,7 +49,8 @@ function part2() {
 
         const r1 = recursive(puzzleResult, accumulator + remaining[0], remaining.slice(1))
         const r2 = recursive(puzzleResult, accumulator * remaining[0], remaining.slice(1))
-        const r3 = recursive(puzzleResult, Number(`${accumulator}${remaining[0]}`), remaining.slice(1))
+        const concatMath = accumulator * Math.pow(10, Math.ceil(Math.log10(remaining[0] + 1))) + remaining[0];
+        const r3 = recursive(puzzleResult, concatMath, remaining.slice(1))
         return r1 || r2 || r3;
     }
 
